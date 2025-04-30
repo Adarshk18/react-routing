@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import { Dashboard } from "./components/Dashboard";
-import { Landing } from "./components/Landing";
+// import { Dashboard } from "./components/Dashboard";
+const Dashboard = React.lazy(() => './components/Dashboard') ;
+const  Landing = React.lazy(()=> "./components/Landing") ;
 
 function App() {
   // const navigate = useNavigate(); // this hooke can only be invoe side a component in browserrouter
   return (
     <div>
       <BrowserRouter>
-        
         <AppBar />
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
@@ -46,3 +46,6 @@ function AppBar() {
 //to make a top level bar always on every screen just wrap the browserstack with div
 
 export default App;
+
+//lazy loading 
+
