@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
+import { CountContext } from "./context";
 // import { Dashboard } from "./components/Dashboard";
 const Dashboard = React.lazy(() => import("./components/Dashboard"));
 const Landing = React.lazy(() => import("./components/Landing"));
@@ -86,23 +87,28 @@ const Landing = React.lazy(() => import("./components/Landing"));
 
 function App() {
   const [count, setCount] = useState(0);
+
+  //warp anyone that wants to use the teleported value inside the provider
   return (
     <div>
+      <CountContext.Provider value={count}>
       <Count count={count} setCount={setCount} />
+      </CountContext.Provider>
     </div>
   );
 }
 
-function Count({ count, setCount }) {
+function Count({ setCount }) {
   return (
     <div>
-      <CountRenderer count={count} />
-      <Buttons count={count} setCount={setCount} />
+      <CountRenderer />
+      <Buttons setCount={setCount} />
     </div>
   );
 }
 
-function CountRenderer({ count }) {
+function CountRenderer() {
+  const count = useContext(CountContext);
   return <div>{count}</div>;
 }
 
