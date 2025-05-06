@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { CountContext } from "./context";
 // import { Dashboard } from "./components/Dashboard";
