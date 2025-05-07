@@ -1,7 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./App.css";
 import { CountContext } from "./context";
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import {
+  RecoilRoot,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import { countAtom } from "./store/atoms/count";
 // import { Dashboard } from "./components/Dashboard";
 const Dashboard = React.lazy(() => import("./components/Dashboard"));
@@ -160,17 +165,32 @@ function Count() {
 function CountRenderer() {
   const count = useRecoilValue(countAtom);
 
-  return <div>{count}</div>;
+  return (
+    <div>
+      <b>{count}</b>
+
+      <EvenCountRenderer />
+    </div>
+  );
+}
+
+function EvenCountRenderer (){
+  const count = useRecoilValue(countAtom);
+  return <div>
+    {count%2 ==0 ? "It is even" : null}
+  </div>
 }
 
 function Buttons() {
-  const [count, setCount] = useRecoilState(countAtom);
+  // const [count, setCount] = useRecoilState(countAtom);
 
+  //if i only wants setCount
+  const setCount = useSetRecoilState(countAtom);
   return (
     <div>
       <button
         onClick={() => {
-          setCount(count + 1);
+          setCount((count) => count + 1);
         }}
       >
         Increasing
@@ -178,7 +198,7 @@ function Buttons() {
 
       <button
         onClick={() => {
-          setCount(count - 1);
+          setCount((count) => count - 1);
         }}
       >
         Decreasing
