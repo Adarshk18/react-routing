@@ -151,6 +151,17 @@ function App() {
       </RecoilRoot>
     </div>
   );
+} 
+
+function Todo(){
+  const [title, setTitle]= useState('');
+  return <div>
+    <input placeholder="title" onChange={(e)=> {
+      setValue(e.target.value)
+    }}></input>
+    <input placeholder="description"></input>
+    <button>Add Todo</button>
+  </div>
 }
 
 function Count() {
