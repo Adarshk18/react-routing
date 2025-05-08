@@ -7,7 +7,7 @@ import {
   useRecoilValue,
   useSetRecoilState,
 } from "recoil";
-import { countAtom } from "./store/atoms/count";
+import { countAtom, evenSelector } from "./store/atoms/count";
 // import { Dashboard } from "./components/Dashboard";
 const Dashboard = React.lazy(() => import("./components/Dashboard"));
 const Landing = React.lazy(() => import("./components/Landing"));
@@ -175,9 +175,9 @@ function CountRenderer() {
 }
 
 function EvenCountRenderer (){
-  const count = useRecoilValue(countAtom);
+  const isEven = useRecoilValue(evenSelector);
   return <div>
-    {count%2 ==0 ? "It is even" : null}
+    {isEven ? "It is even" : null}
   </div>
 }
 
